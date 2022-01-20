@@ -49,18 +49,7 @@ def main():
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     done = True
-                # elif event.key == pygame.K_DOWN:
-                #     dy
-                # elif event.key == pygame.K_UP:
-                #     dy
-                # elif event.key == pygame.K_SPACE:
-                #     dy = 0
-                #     dx = 0
-                # elif event.key == pygame.K_LEFT:
-                #     dx
-                # elif event.key == pygame.K_RIGHT:
-                #     dx
-                
+
         for ball in balls:
             min_y = ball.radius
             max_y = SCREEN_HEIGHT - ball.radius
@@ -68,6 +57,10 @@ def main():
             min_x = ball.radius
             max_x = SCREEN_WIDTH - ball.radius
             ball.x = constrain(min_x, ball.x + ball.dx, max_x)
+            if ball.x in (min_x, max_x):
+                ball.dx = -ball.dx
+            if ball.y in (min_y, max_y):
+                ball.dy = -ball.dy
         # Draw everything
         screen.fill(BACKGROUND_COLOR)
 
