@@ -1,6 +1,7 @@
 import random
 
 import pygame
+from pygame.constants import *
 
 # Define some colors
 BACKGROUND_COLOR = (255, 255, 255)
@@ -52,30 +53,33 @@ def main():
         # Limit number of frames per second
         clock.tick(60)
 
+        up = pygame.key.get_pressed()[K_UP]
+        down = pygame.key.get_pressed()[K_DOWN]
+        left = pygame.key.get_pressed()[K_LEFT]
+        right = pygame.key.get_pressed()[K_RIGHT]
+        escape = pygame.key.get_pressed()[K_ESCAPE]
+        color_randomizer = pygame.key.get_pressed()[K_r]
+        new_ball = pygame.key.get_pressed()[K_a]
+
+        if escape:
+            done = True
+        if color_randomizer:
+            balls.append(Ball(SCREEN_HEIGHT/2, SCREEN_WIDTH/2, random.randint(45, 55)))
+        if new_ball:
+            balls.append(Ball(SCREEN_HEIGHT/2, SCREEN_WIDTH/2, random.randint(45, 55)))
+        if up:
+            player.y -= 1
+        if down:
+            player.y += 1
+        if left:
+            player.x -= 1
+        if right:
+            player.x += 1
 
         # Event Processing
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    done = True
-                elif event.key == pygame.K_r:
-                    Ball.randomize(random.choice(balls))
-                elif event.key == pygame.K_a:
-                    balls.append(Ball(SCREEN_HEIGHT/2, SCREEN_WIDTH/2, random.randint(45, 55)))
-                elif event.key == pygame.K_DOWN:
-                    pygame.key.set_repeat(1)
-                    player.y += 1
-                elif event.key == pygame.K_UP:
-                    pygame.key.set_repeat(1)
-                    player.y -= 1
-                elif event.key == pygame.K_LEFT:
-                    pygame.key.set_repeat(1)
-                    player.x -= 1
-                elif event.key == pygame.K_RIGHT:
-                    pygame.key.set_repeat(1)
-                    player.x += 1
 
         for ball in balls:
             min_y = ball.radius
