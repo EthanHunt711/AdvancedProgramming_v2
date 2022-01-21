@@ -2,6 +2,8 @@ import random
 
 import pygame
 from pygame.constants import *
+from tkinter import *
+from tkinter import messagebox
 
 # Define some colors
 BACKGROUND_COLOR = (255, 255, 255)
@@ -9,6 +11,8 @@ BALL_COLOR = (0, 0, 0)
 
 SCREEN_WIDTH = 700
 SCREEN_HEIGHT = 500
+
+
 
 
 class Ball:
@@ -31,11 +35,30 @@ class Player:
         self.radius = 15
 
 
+def move(object):
+    up = pygame.key.get_pressed()[K_UP]
+    down = pygame.key.get_pressed()[K_DOWN]
+    left = pygame.key.get_pressed()[K_LEFT]
+    right = pygame.key.get_pressed()[K_RIGHT]
+    escape = pygame.key.get_pressed()[K_ESCAPE]
+
+    if escape:
+        done = True
+    if up:
+        object.y -= 1
+    if down:
+        object.y += 1
+    if left:
+        object.x -= 1
+    if right:
+        object.x += 1
+
+
 def main():
     pygame.init()
 
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    pygame.display.set_caption("Balls5")
+    pygame.display.set_caption("Balls6")
 
     # Used to manage how fast the screen updates
     clock = pygame.time.Clock()
@@ -46,35 +69,28 @@ def main():
 
     player = Player()
 
-
     # Loop until the user clicks the close button or ESC.
     done = False
     while not done:
         # Limit number of frames per second
         clock.tick(60)
 
-        up = pygame.key.get_pressed()[K_UP]
-        down = pygame.key.get_pressed()[K_DOWN]
-        left = pygame.key.get_pressed()[K_LEFT]
-        right = pygame.key.get_pressed()[K_RIGHT]
-        escape = pygame.key.get_pressed()[K_ESCAPE]
+        v2 = pygame.math.Vector2(player.x, player.y)
+        for ball in balls:
+            v1 = pygame.math.Vector2(ball.x, ball.y)
+            if v1.distance_to(v2) < ball.radius + player.radius:
+                done = True
+                # Tk().wm_withdraw()
+                # messagebox.showinfo('Nooooo', 'LOST')
         color_randomizer = pygame.key.get_pressed()[K_r]
         new_ball = pygame.key.get_pressed()[K_a]
 
-        if escape:
-            done = True
         if color_randomizer:
-            balls.append(Ball(SCREEN_HEIGHT/2, SCREEN_WIDTH/2, random.randint(45, 55)))
+            balls.append(Ball(SCREEN_HEIGHT / 2, SCREEN_WIDTH / 2, random.randint(45, 55)))
         if new_ball:
-            balls.append(Ball(SCREEN_HEIGHT/2, SCREEN_WIDTH/2, random.randint(45, 55)))
-        if up:
-            player.y -= 1
-        if down:
-            player.y += 1
-        if left:
-            player.x -= 1
-        if right:
-            player.x += 1
+            balls.append(Ball(SCREEN_HEIGHT / 2, SCREEN_WIDTH / 2, random.randint(45, 55)))
+
+        move(player)
 
         # Event Processing
         for event in pygame.event.get():
