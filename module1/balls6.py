@@ -79,7 +79,7 @@ def main():
             if v1.distance_to(v2) < ball.radius + player.radius:
                 done = True
                 Tk().wm_withdraw()
-                messagebox.showerror('Nooooo', 'LOST')
+                messagebox.showerror('OMG', 'LOST')
         color_randomizer = pygame.key.get_pressed()[K_r]
         new_ball = pygame.key.get_pressed()[K_a]
 
