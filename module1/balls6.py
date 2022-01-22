@@ -13,8 +13,6 @@ SCREEN_WIDTH = 700
 SCREEN_HEIGHT = 500
 
 
-
-
 class Ball:
     def __init__(self, x, y, radius):
         self.x = x
