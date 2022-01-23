@@ -80,13 +80,13 @@ def main():
                 done = True
                 Tk().wm_withdraw()
                 messagebox.showerror('OMG', 'LOST')
-        color_randomizer = pygame.key.get_pressed()[K_r]
-        new_ball = pygame.key.get_pressed()[K_a]
+        # color_randomizer = pygame.key.get_pressed()[K_r]
+        # new_ball = pygame.key.get_pressed()[K_a]
 
-        if color_randomizer:
-            balls.append(Ball(SCREEN_HEIGHT / 2, SCREEN_WIDTH / 2, random.randint(45, 55)))
-        if new_ball:
-            balls.append(Ball(SCREEN_HEIGHT / 2, SCREEN_WIDTH / 2, random.randint(45, 55)))
+        # if color_randomizer:
+        #     balls.append(Ball(SCREEN_HEIGHT / 2, SCREEN_WIDTH / 2, random.randint(45, 55)))
+        # if new_ball:
+        #     balls.append(Ball(SCREEN_HEIGHT / 2, SCREEN_WIDTH / 2, random.randint(45, 55)))
 
         move(player)
 
@@ -94,6 +94,13 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    done = True
+                if event.key == pygame.K_r:
+                    Ball.randomize(random.choice(balls))
+                if event.key == pygame.K_a:
+                    balls.append(Ball(SCREEN_HEIGHT / 2, SCREEN_WIDTH / 2, random.randint(45, 55)))
 
         for ball in balls:
             min_y = ball.radius
