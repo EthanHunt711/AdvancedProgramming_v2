@@ -1,6 +1,6 @@
-from binary_search import binary_search
-from linear_search import linear_search
-from bubble_sort import bubble_sort
+from Linear_search import linear_search
+from Binary_search import binary_search
+from Bubble_sort import bubble_sort
 
 from get_random import lists
 import time
