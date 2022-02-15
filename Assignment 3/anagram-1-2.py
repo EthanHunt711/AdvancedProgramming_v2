@@ -5,6 +5,8 @@ from Bubble_sort import bubble_sort
 """This is a program for which the user can check for anagrams. The user enters the line in  
 terminal which specifies a dictionary/file and an input word (in Swedish for the current purpose) and see if there are 
 other words in the given dictionary that shares exactly the same characters as the user's"""
+# OBS!!! little change from the assignment instruction. The file containing the original words
+# is to be mentioned in the terminal so there is a possibility to use for any language
 
 
 class LexicalEntry:  # creating an object for the dictionary keys
@@ -72,8 +74,7 @@ if __name__ == "__main__":
         word_in = sys.argv[2]
         print('Loading file and searching ...')
         lexi_dict = creating_game_data(file_in)
-        if word_to_list(word_in) not in lexi_dict.keys():
+        if word_to_list(word_in) in lexi_dict.keys():
             print(f'{list_to_elements(lexi_dict[word_to_list(word_in)])}')
         else:
             print('')
-
