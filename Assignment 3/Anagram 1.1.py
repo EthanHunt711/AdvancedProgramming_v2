@@ -1,3 +1,4 @@
+import sys
 from collections import defaultdict
 from Bubble_sort import bubble_sort
 
@@ -44,17 +45,17 @@ def find_similar_for_values(diction, open_file):
             if j in diction.keys():
                 diction[j].append(q)
 
+def list_to_elements(list_in):
+    return ', '.join(list_in)
 
-def main(filename):
+def creating_game_data(filename):
     q = make_dict_keys(filename)
     find_similar_for_values(q, filename)
     return q
 
-
-if __name__ == "__main__":
-    lexi_dict = main('sv-utf8.txt')
-    anv_inm = input('Dags för ett kult ordspel\n\nSkriv in ett valfritt svenskt ord: ')
-    while True:
+def menu(input_1, lexi_dict):
+    if input_1.lower() == 'ja':
+        anv_inm = input('Skriv in ett valfritt svenskt ord: ')
         if type(anv_inm) != str:
             print(f'{anv_inm} är troligtvis ett ogiltigt tecken')
         else:
@@ -64,6 +65,26 @@ if __name__ == "__main__":
                 if len(lexi_dict[word_to_list(anv_inm)]) == 0:
                     print(f'Det finns inga anagram för {anv_inm}')
                 else:
-                    print(f'alla ord i den här listan delar samma anagram som ordet inmatade:\n'
-                          f'{lexi_dict[word_to_list(anv_inm)]}')
+                    print(f'Det finns {len(lexi_dict[word_to_list(anv_inm)])} anagram för ditt ord:\n'
+                          f'{list_to_elements(lexi_dict[word_to_list(anv_inm)])}\n')
+                    next_round_input = input('Vill du prova ett annat ord: ')
+                    menu(next_round_input, lexi_dict)
 
+    elif input_1.lower() != 'nej':
+        new_input = input(f'Inte helt säkert vad du menar med "{input_1}",\nkan du vara mer tydlig!')
+
+        menu(new_input, lexi_dict)
+
+    else:
+        print('Tråkigt, men vi hoppas på ett återbesök :)\nHejdå så länge')
+
+        sys.exit()
+
+
+if __name__ == "__main__":
+
+    print('Dags att spela ett kult ordspel\n\n-------------***Spelet laddas***------------- ')
+    main_lexi_dict = creating_game_data('sv-utf8.txt')
+    choice_2 = input('Vill du spela: ')
+
+    menu(choice_2, main_lexi_dict)
