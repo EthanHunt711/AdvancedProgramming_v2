@@ -67,7 +67,7 @@ def creating_game_data(filename):  # with adding the file we create the main dat
 if __name__ == "__main__":
 
     if len(sys.argv) != 3:
-        print('usage: python anagram-1-2.py FILE INPUT ')
+        print('usage: python anagram-1-2.py FILE WORD ')
         exit()
     else:
         file_in = sys.argv[1]
