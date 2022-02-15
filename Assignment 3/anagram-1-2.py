@@ -66,12 +66,12 @@ def creating_game_data(filename):  # with adding the file we create the main dat
 
 if __name__ == "__main__":
 
-    if len(sys.argv) != 3:
+    if len(sys.argv) != 3:  # if the arguments for the terminal is out of bound
         print('usage: python anagram-1-2.py FILE WORD ')
         exit()
     else:
-        file_in = sys.argv[1]
-        word_in = sys.argv[2]
+        file_in = sys.argv[1]  # the file for unpacking and creating dictionary
+        word_in = sys.argv[2]  # the word to search for
         print('Loading file and searching ...')
         lexi_dict = creating_game_data(file_in)
         if word_to_list(word_in) in lexi_dict.keys():
