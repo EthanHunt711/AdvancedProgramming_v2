@@ -1,7 +1,10 @@
 import sys
-import time
 from collections import defaultdict
 from Bubble_sort import bubble_sort
+
+"""This is a program for which the user is engaged for a game of anagrams. The user is asked to 
+enter a word (in Swedish for the current purpose) and see if there are other words in the given
+dictionary that shares exactly the same characters as the user's"""
 
 
 class LexicalEntry:  # creating an object for the dictionary keys
