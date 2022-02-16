@@ -80,7 +80,8 @@ def menu(input_1, lexi_dict):  # the main menu for the program
                     next_round_input = input('Vill du prova ett annat ord: ')
                     menu(next_round_input, lexi_dict)
                 else:  # if there are anagrams
-                    print(f'Det finns {len(lexi_dict[word_to_list(anv_inm)])} anagram för ditt ord:\n'
+                    print(f'Det finns {len(lexi_dict[word_to_list(anv_inm)])} anagram för ditt ord (inclusiv ditt ord):'
+                          f'\n'
                           f'{list_to_elements(lexi_dict[word_to_list(anv_inm)])}\n')
                     next_round_input = input('Vill du prova ett annat ord: ')
                     menu(next_round_input, lexi_dict)
