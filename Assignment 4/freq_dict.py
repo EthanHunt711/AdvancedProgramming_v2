@@ -3,30 +3,15 @@ from nltk import sent_tokenize, word_tokenize
 
 from collections import defaultdict
 
-freq_dict = defaultdict(int)
-
-
-def make_list(filename):
-    with open(filename, encoding='utf8') as f:
-        list_of_bigrams = []
-        for line in f:
-            sent = line.split()
-            for i, word in enumerate(sent):
-                if i == 0:
-                    list_of_bigrams.append(('<s>', sent[i].lower()))
-
-                elif i == len(sent)-1:
-                    list_of_bigrams.append((sent[i].lower(), '<e>'))
-
-                elif 0 < i < len(sent)-1:
-                    list_of_bigrams.append((sent[i].lower(), sent[i+1].lower()))
-        return list_of_bigrams
+bigram_freq_dict = defaultdict(int)
 
 
 def make_dict(filename):
-    list_of_b = make_list(filename)
-    for bi_gram in list_of_b:
-        if bi_gram not in freq_dict:
-            freq_dict[bi_gram] = 0
-        freq_dict[bi_gram] += 1
-    return freq_dict
+    with open(filename, encoding='utf8') as f:
+        for line in f:
+            sent_1_try = line.lower()
+            tokened_line = word_tokenize(sent_1_try)
+            for i in range(len(tokened_line)-1):
+                bigram_freq_dict[(tokened_line[i], tokened_line[i+1])] += 1
+
+        return bigram_freq_dict
