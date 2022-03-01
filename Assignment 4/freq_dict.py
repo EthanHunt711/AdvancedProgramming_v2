@@ -1,12 +1,12 @@
-import re
-from nltk import sent_tokenize, word_tokenize
+"""making the bigram dictionary with distributive probability as values"""
 
+from nltk import word_tokenize
 from collections import defaultdict
 
 bigram_freq_dict = defaultdict(int)
 
 
-def make_dict(filename):
+def make_dict(filename):  # method for reading from a training text file and making bigrams
     with open(filename, encoding='utf8') as f:
         for line in f:
             sent_1_try = line.lower()
