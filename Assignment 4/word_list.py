@@ -1,5 +1,5 @@
 def make_word_list(filename):
-    with open(filename, encoding='utf-8') as f:
+    with open(filename, encoding='unicode_escape') as f:
         list_of_words = []
         for line in f:
             word = line.strip().lower()
@@ -7,4 +7,4 @@ def make_word_list(filename):
         return list_of_words
 
 
-main_word_list = make_word_list('sv-utf8.txt')
+main_word_list = make_word_list('ukenglish.txt')
